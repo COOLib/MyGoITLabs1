@@ -25,33 +25,34 @@ public class Main {
 
         Calculator calculator = new SpecificCalculator(actions);
 
-        String s = "( 8 + 2 * 5 ) / ( 1 + 3 * 2 - 4 )";
+        String string = "((4+5)+5-3+sqrt(16)+9)";
 
-        String k = "8 2 5 * + 1 3 2 * + 4 - /";
+        String subres = "4 5 + 5 + 3 - 16 sqrt + 9 +";
+        System.out.println(string);
+        System.out.println(subres);
 
-        StringBuilder m = new StringBuilder();
-        StringBuilder m1 = new StringBuilder();
+        String polish = calculator.convert(string);
+        System.out.println(polish);
 
-        String[] s1 = k.split(" ");
+        String[] polishArr = polish.split(" ");
+        StringBuilder builder = new StringBuilder();
 
-        for (int i = s1.length - 1; i >= 0; i--) {
-            m.append(s1[i]);
-            m.append(" ");
+        StringBuffer s = new StringBuffer();
+        s.append(polish);
+        s.reverse();
+
+        System.out.println(s);
+
+        for (int i = polishArr.length - 1; i >=0; i--) {
+            builder.append(polishArr[i]);
+            builder.append(" ");
         }
 
-        System.out.println(m);
-
         try {
-            System.out.println(calculator.calculateAnswer(m.toString()));
+            System.out.println(calculator.getAnswer(builder.toString()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        String string = "((pow(4)+5)+5-3+sqrt(16)+9)";
-        System.out.println();
-        System.out.println(string);
-        System.out.println(calculator.convert(string));
 /*
         List<String> operations = new ArrayList<>();
         List<String> operands = new ArrayList<>();

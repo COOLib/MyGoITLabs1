@@ -18,7 +18,15 @@ public class SpecificCalculator implements Calculator {
     public String getAnswer(String formula) throws Exception {
 
         String postfixFormula = convert(formula);
-        double result = calculateAnswer(postfixFormula);
+
+        StringBuilder builder = new StringBuilder();
+        String[] polishArr = postfixFormula.split(" ");
+
+        for (int i = polishArr.length - 1; i >=0; i--) {
+            builder.append(polishArr[i]);
+            builder.append(" ");
+        }
+        double result = calculateAnswer(builder.toString());
         long cutted = Math.round(result);
         double accuracy = 0.00001;
 
@@ -38,17 +46,12 @@ public class SpecificCalculator implements Calculator {
 
         Deque<Character> op = new ArrayDeque<>();
         char[] chars = replacedFormula.toCharArray();
-        System.out.println(replacedFormula);
 
         for (int i = 0; i < chars.length; i++) {
             char ch = chars[i];
 
             if (Character.isDigit(ch)) {
-
-                while (Character.isDigit(chars[i])) {
-                    sb.append(chars[i]);
-                    i++;
-                }
+                    sb.append(ch);
 
                 sb.append(' ');
             } else if (ch == '(') {
