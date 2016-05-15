@@ -4,6 +4,9 @@ package ua.goit.actions;
  * Created by COOLib on 15.05.2016.
  */
 public class TanAction implements Action {
+
+    private boolean isUnary = true;
+
     @Override
     public double unaryAction(double argument1) {
 
@@ -18,6 +21,6 @@ public class TanAction implements Action {
 
     @Override
     public boolean isUnary() {
-        return true;
+        return isUnary;
     }
 }

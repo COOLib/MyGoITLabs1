@@ -18,4 +18,6 @@ public interface Calculator {
     public Action getAction(String selectedAction);
 
     public String convert(String formula);
+
+    public String reverseReplace(String formula);
 }

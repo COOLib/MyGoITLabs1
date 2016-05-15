@@ -22,11 +22,13 @@ public class SpecificCalculator implements Calculator {
         StringBuilder builder = new StringBuilder();
         String[] polishArr = postfixFormula.split(" ");
 
-        for (int i = polishArr.length - 1; i >=0; i--) {
+        for (int i = polishArr.length - 1; i >= 0; i--) {
             builder.append(polishArr[i]);
             builder.append(" ");
         }
-        double result = calculateAnswer(builder.toString());
+
+        String totalFormula = reverseReplace(builder.toString());
+        double result = calculateAnswer(totalFormula);
         long cutted = Math.round(result);
         double accuracy = 0.00001;
 
@@ -51,9 +53,13 @@ public class SpecificCalculator implements Calculator {
             char ch = chars[i];
 
             if (Character.isDigit(ch)) {
+                if (i + 1 < chars.length && Character.isDigit(chars[i + 1])) {
                     sb.append(ch);
-
-                sb.append(' ');
+                    continue;
+                } else {
+                    sb.append(ch);
+                    sb.append(' ');
+                }
             } else if (ch == '(') {
 
                 op.push(ch);
@@ -97,6 +103,29 @@ public class SpecificCalculator implements Calculator {
                 result = result.replace(s2, "L");
             } else if (result.contains(s3)) {
                 result = result.replace(s3, "T");
+            }
+
+            k--;
+        }
+
+        return result;
+    }
+
+    public String reverseReplace(String str) {
+
+        String s = "P", s1 = "S", s2 = "L", s3 = "T";
+        String result = str;
+
+        int k = str.length();
+        while (k >= 0) {
+            if (result.contains(s)) {
+                result = result.replace(s, "pow");
+            } else if (result.contains(s1)) {
+                result = result.replace(s1, "sqrt");
+            } else if (result.contains(s2)) {
+                result = result.replace(s2, "log");
+            } else if (result.contains(s3)) {
+                result = result.replace(s3, "tan");
             }
 
             k--;

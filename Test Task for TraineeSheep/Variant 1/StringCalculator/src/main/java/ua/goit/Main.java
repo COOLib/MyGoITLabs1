@@ -25,11 +25,11 @@ public class Main {
 
         Calculator calculator = new SpecificCalculator(actions);
 
-        String string = "((4+5)+5-3+sqrt(16)+9)";
+        String string = "((2*2+5)+5+(4)-3+(16/4)+9)";
 
-        String subres = "4 5 + 5 + 3 - 16 sqrt + 9 +";
+        String subRes = "2 2 * 5 + 5 + 4 ! + 3 - 16 4 / + 9 +";
         System.out.println(string);
-        System.out.println(subres);
+        System.out.println(subRes);
 
         String polish = calculator.convert(string);
         System.out.println(polish);
@@ -37,54 +37,25 @@ public class Main {
         String[] polishArr = polish.split(" ");
         StringBuilder builder = new StringBuilder();
 
-        StringBuffer s = new StringBuffer();
-        s.append(polish);
-        s.reverse();
-
-        System.out.println(s);
-
         for (int i = polishArr.length - 1; i >=0; i--) {
             builder.append(polishArr[i]);
             builder.append(" ");
         }
 
-        try {
-            System.out.println(calculator.getAnswer(builder.toString()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-/*
-        List<String> operations = new ArrayList<>();
-        List<String> operands = new ArrayList<>();
+        System.out.println(builder.toString());
 
-        for (int i = 0; i < s1.length; i++) {
-            if (s1[i].equals(actions.containsKey(s1[i]))) {
-                operations.add(s1[i]);
-            } else {
-                operands.add(s1[i]);
-            }
-        }
-        System.out.println();
+        String total = calculator.reverseReplace(builder.toString());
 
-
-        for (String str :operands) {
-            System.out.print(str + ",  ");
-        }
+        System.out.println(total);
 
         System.out.println();
-
-        for (String str : operations) {
-            System.out.print(str + ",  ");
-        }
-
         System.out.println();
 
         try {
-            System.out.println(calculator.getAnswer(s));
+            System.out.println(calculator.calculateAnswer(total));
+            System.out.println(calculator.getAnswer(string));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-*/
     }
 }
