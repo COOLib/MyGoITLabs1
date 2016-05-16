@@ -200,7 +200,6 @@ public class SpecificCalculator implements Calculator {
 
                     myStrings.remove(j - 1);
                     myStrings.add(String.valueOf(result));
-                    j++;
                 }
             } else {
 

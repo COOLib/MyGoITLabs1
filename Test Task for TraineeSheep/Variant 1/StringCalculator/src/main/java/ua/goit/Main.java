@@ -6,9 +6,6 @@ import ua.goit.actions.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by COOLib on 15.05.2016.
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -25,28 +22,28 @@ public class Main {
 
         Calculator calculator = new SpecificCalculator(actions);
 
-        String string = "((2*2+5)+5+(4)-3+(16/4)+9)";
+        String string = "1+sqrt(4)+!(5)";
 
-        String subRes = "2 2 * 5 + 5 + 4 ! + 3 - 16 4 / + 9 +";
-        System.out.println(string);
-        System.out.println(subRes);
+        String subRes = "2 2 * 5 + 5 + 4 + 3 - 16 4 / + 9 +";
+        System.out.println("original string: " + string);
 
         String polish = calculator.convert(string);
-        System.out.println(polish);
+        System.out.println("reversed polish string: " + polish);
 
         String[] polishArr = polish.split(" ");
         StringBuilder builder = new StringBuilder();
 
-        for (int i = polishArr.length - 1; i >=0; i--) {
+        for (int i = polishArr.length - 1; i >= 0; i--) {
             builder.append(polishArr[i]);
             builder.append(" ");
         }
 
-        System.out.println(builder.toString());
+        System.out.println("again reversed string: " + builder.toString());
 
         String total = calculator.reverseReplace(builder.toString());
 
-        System.out.println(total);
+        System.out.println();
+        System.out.println("total: " + total);
 
         System.out.println();
         System.out.println();
