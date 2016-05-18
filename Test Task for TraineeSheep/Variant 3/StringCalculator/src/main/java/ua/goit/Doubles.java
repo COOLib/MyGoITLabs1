@@ -235,7 +235,7 @@ public class Doubles {
 
             if (i == -1) {
                 helpNumber = i;
-            } else if (helpNumber < 0) {
+            } else if (helpNumber <= 0) {
                 decimal = decimal / Math.pow(10, i);
             } else {
                 decimal = decimal * Math.pow(10, i);

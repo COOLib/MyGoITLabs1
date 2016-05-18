@@ -22,9 +22,15 @@ public class Main {
 
         Calculator calculator = new SpecificCalculator(actions);
 
-        String string = "2.2+(-2.2)";
+        //String string = "-2.e-2-3.3-5-.1";            normal = -8.42
+        //String string = "-2.e-2-3.3+5-.1";   Expected = 1.58,  Actual = 0.92
+        //String string = "-2.e-2-3.3+5-(.1)"; Expected = 1.58,  Actual = 0.002
+        //String string = "-2.e-2-3.3-5+.1";            normal = -8.22
+        //String string = "-2.e-2-3.3+5+.1";   Expected = 1.78   Actual = 1.102
+        //String string = "-2-3.3+5+.1";       Expected = -0.1   Actual = -0.1999999999
+        // String string = "2.e-2+3.3-5/.1";   Expected = -46.68 Actual = 153.3
+        String string = "-3.3+1.1";
 
-        String subRes = "2 2 * 5 + 5 + 4 + 3 - 16 4 / + 9 +";
         System.out.println("original string: " + string);
 
         String polish = calculator.convert(string);

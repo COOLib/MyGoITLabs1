@@ -29,12 +29,12 @@ public class SpecificCalculator implements Calculator {
 
         String totalFormula = reverseReplace(builder.toString());
         double result = calculateAnswer(totalFormula);
-        long cutted = Math.round(result);
+        long cutted = (long) result;
         double accuracy = 0.00001;
 
-        if ((result - cutted) > accuracy) {
+        if (Math.abs(result) - Math.abs(cutted) > accuracy) {
             return String.valueOf(result);
-        } else if (cutted <= Integer.MAX_VALUE) {
+        } else if (cutted <= Integer.MAX_VALUE && cutted >= Integer.MIN_VALUE) {
             return String.valueOf((int) result);
         } else {
             return String.valueOf((long) result);
@@ -56,10 +56,11 @@ public class SpecificCalculator implements Calculator {
                 if (i == 0 || Character.isDigit(chars[i - 1]) || isOperator(chars[i - 1]) || chars[i - 1] == ' ') {
                     sb.append(ch);
                 }
-            }
+            } else if (ch == 'e' && i > 0 && (chars[i - 1] == '.' || Character.isDigit(chars[i - 1]))) {
+                sb.append(ch);
 
-            if (Character.isDigit(ch)) {
-                if (i + 1 < chars.length && Character.isDigit(chars[i + 1])) {
+            } else if (Character.isDigit(ch)) {
+                if (i + 1 < chars.length && (Character.isDigit(chars[i + 1]) || chars[i + 1] == '.')) {
                     sb.append(ch);
                 } else {
                     sb.append(ch);
@@ -101,7 +102,7 @@ public class SpecificCalculator implements Calculator {
         return sb.toString();
     }
 
-    private String replace(String str) {
+    public String replace(String str) {
 
         String s = "pow", s1 = "sqrt", s2 = "log", s3 = "tan";
         String result = str;
