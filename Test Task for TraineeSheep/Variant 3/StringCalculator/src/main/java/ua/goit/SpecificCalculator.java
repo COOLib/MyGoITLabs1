@@ -53,7 +53,7 @@ public class SpecificCalculator implements Calculator {
             char ch = chars[i];
 
             if (ch == '.') {
-                if (i == 0 || Character.isDigit(chars[i - 1]) || isOperator(chars[i - 1]) || chars[i - 1] == ' ') {
+                if (i == 0 || Character.isDigit(chars[i - 1]) || isOperator(chars[i - 1]) || chars[i - 1] == ' ' || chars[i - 1] == '(') {
                     sb.append(ch);
                 }
             } else if (ch == 'e' && i > 0 && (chars[i - 1] == '.' || Character.isDigit(chars[i - 1]))) {
@@ -179,8 +179,6 @@ public class SpecificCalculator implements Calculator {
         String[] totalArr = formula.split(" ");
         String[] arr = new String[totalArr.length];
 
-        Doubles doubles = new Doubles();
-
         for (int i = 0; i < arr.length; i++) {
             arr[i] = totalArr[arr.length - 1 - i];
         }
@@ -194,9 +192,9 @@ public class SpecificCalculator implements Calculator {
 
                 if (!actionMap.get(anArr).isUnary()) {
 
-                    double first = doubles.parse(myStrings.get(j - 2));
+                    double first = Double.parseDouble(myStrings.get(j - 2));
 
-                    double second = doubles.parse(myStrings.get(j - 1));
+                    double second = Double.parseDouble(myStrings.get(j - 1));
 
                     myStrings.remove(j - 1);
                     j--;
@@ -209,7 +207,7 @@ public class SpecificCalculator implements Calculator {
                     j++;
                 } else {
 
-                    double alone = doubles.parse(myStrings.get(j - 1));
+                    double alone = Double.parseDouble(myStrings.get(j - 1));
                     double result = actionMap.get(anArr).unaryAction(alone);
 
                     myStrings.remove(j - 1);
